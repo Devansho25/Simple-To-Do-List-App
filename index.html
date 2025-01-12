@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic To-Do List</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+           
+            background-color: bisque;
+        }
+        h1{
+            text-align: center;
+        }
+        ul {
+            padding: 0;
+        }
+        li {
+            background-color: white;
+            border-radius: 4px;
+            padding: 10px;
+            margin: 6px 0;
+            cursor: pointer;
+        }
+        li.completed {
+            text-decoration: line-through;
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+    <h1>Simple To-Do List App</h1>
+    <input type="text" id="taskInput" placeholder="Add a task">
+    <button onclick="addTask()">Add Task</button>
+    <button onclick="clearCompletedTasks()">Remove Completed</button>
+    <ul id="taskList"></ul>
+
+    <script>
+        function addTask() {
+            const taskInput = document.getElementById('taskInput');
+            const task = taskInput.value.trim();
+
+            if (task !== "") {
+                const listItem = document.createElement('li');
+                listItem.textContent = task;
+
+                // Toggle completion 
+                listItem.onclick = function () {
+                    listItem.classList.toggle('completed');
+                };
+
+                document.getElementById('taskList').appendChild(listItem);
+                taskInput.value = ''; // Clears the input
+            }
+        }
+
+        function clearCompletedTasks() {
+            const tasks = document.querySelectorAll('.completed');
+            tasks.forEach(task => task.remove());
+        }
+    </script>
+</body>
+</html>
